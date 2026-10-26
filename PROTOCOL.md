@@ -108,15 +108,8 @@ form-action conventions, not a hand-rolled backend).
 
 ## Known gaps / things not fully verified
 
-- Long-running session behaviour (what happens exactly at the 1-hour
-  mark, whether there's a sliding expiry, etc.) was not tested live.
-- The `/transformers` tab (visible in the nav) was not investigated —
-  out of scope for the required meter endpoints, but likely relevant to
-  the optional "network hierarchy" extension.
-- Whether a true bulk/export endpoint exists (as opposed to paging
-  through `search` with `q=""`) was not investigated.
-- The hierarchy breadcrumb on the meter detail page isn't wrapped in an
-  obviously-named `<nav>`/`.breadcrumb` element — the client identifies it
-  by matching on the hierarchy code pattern (`(Z-03)`, `(C-06)`, etc.)
-  rather than a CSS selector, since the actual markup wasn't captured from
-  the Elements tab.
+- The hierarchy breadcrumb on the meter detail page is a plain `<nav>`, but it is
+  not the first `<nav>` in the document (the first is the top bar with
+  "Meters | Transformers"). The client scopes the selector to `main nav` to
+  avoid grabbing the wrong element. This depends on the page's current markup
+  and could break if the frontend changes.
